@@ -1,7 +1,7 @@
 @ECHO OFF
 REM By: Nabi KaramAliZadeh <nabikaz@gmail.com>
 REM Description: video to gif converter
-REM Version: 1.0.1
+REM Version: 1.0.0
 REM Url: https://github.com/NabiKAZ/video2gif
 REM License: The MIT License (MIT)
 
@@ -92,6 +92,7 @@ SET filters=fps=%fps%,scale=%width%:-1:flags=lanczos
 
 ECHO Generating palette file. Please wait...
 
+
 CALL ffmpeg -hwaccel dxva2 -v error %time_range% -i "%input%" -vf "%filters%,palettegen=max_colors=%max_colors%" -y "%palette%"
 
 IF NOT EXIST "%palette%" (
@@ -108,7 +109,7 @@ IF NOT EXIST "%output%" (
 	GOTO :EOF
 )
 
-DEL /F /Q "%palette%"
+DEL /F /Q %palette%
 
 ECHO "%output%" Gif file generated successfully.
 ECHO Done.
