@@ -92,7 +92,7 @@ SET filters=fps=%fps%,scale=%width%:-1:flags=lanczos
 
 ECHO Generating palette file. Please wait...
 
-CALL ffmpeg -v error %time_range% -i "%input%" -vf "%filters%,palettegen=max_colors=%max_colors%" -y "%palette%"
+CALL ffmpeg -hwaccel dxva2 -v error %time_range% -i "%input%" -vf "%filters%,palettegen=max_colors=%max_colors%" -y "%palette%"
 
 IF NOT EXIST "%palette%" (
 	ECHO Failed to generate palette file.
@@ -101,7 +101,7 @@ IF NOT EXIST "%palette%" (
 
 ECHO Generating gif file. Please wait...
 
-CALL ffmpeg -v error %time_range% -i "%input%" -i "%palette%" -lavfi "%filters% [x]; [x][1:v] paletteuse=dither=%dither%" %overwrite% "%output%"
+CALL ffmpeg -hwaccel dxva2 -v error %time_range% -i "%input%" -i "%palette%" -lavfi "%filters% [x]; [x][1:v] paletteuse=dither=%dither%" %overwrite% "%output%"
 
 IF NOT EXIST "%output%" (
 	ECHO Failed to generate gif file.
