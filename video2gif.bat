@@ -109,7 +109,7 @@ IF NOT EXIST "%output%" (
 	GOTO :EOF
 )
 
-DEL /F /Q %palette%
+DEL /F /Q "%palette%"
 
 ECHO "%output%" Gif file generated successfully.
 ECHO Done.
